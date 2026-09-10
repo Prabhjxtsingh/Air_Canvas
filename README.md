@@ -15,6 +15,9 @@ python version1/air_canvas.py
 
 The browser-based Django application is in `version2/`.
 
+The hosted static version is deployed by GitHub Pages at:
+`https://prabhjxtsingh.github.io/Air_Canvas/`
+
 ```powershell
 python -m pip install -r requirements.txt
 python version2/manage.py runserver
@@ -22,3 +25,6 @@ python version2/manage.py runserver
 
 Open `http://127.0.0.1:8000/` and allow camera access. See the detailed
 instructions in [version2/README.md](version2/README.md).
+
+The GitHub Pages version uses the browser download for PNG saving. The local
+Django version also stores a server copy in `version2/media/`.

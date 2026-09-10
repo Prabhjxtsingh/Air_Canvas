@@ -18,6 +18,12 @@ Open `http://127.0.0.1:8000/` in a browser and allow camera access. The
 browser runs hand tracking locally; Django serves the interface and stores
 saved PNGs in `media/`.
 
+## Hosted version
+
+The static browser version is published at
+`https://prabhjxtsingh.github.io/Air_Canvas/`. It uses the browser's PNG
+download because GitHub Pages does not run the Django save API.
+
 ## How to use it
 
 - **Draw**: hold up only your index finger and move it around. A line
