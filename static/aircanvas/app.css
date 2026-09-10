@@ -11,6 +11,14 @@
   --gold: #f2b84b;
 }
 
+body.night-mode {
+  --ink: #edf4ef;
+  --muted: #a4b5ad;
+  --paper: #172321;
+  --panel: #22322e;
+  --line: #3b514a;
+}
+
 * { box-sizing: border-box; }
 body {
   margin: 0;
@@ -30,11 +38,14 @@ body::before {
 }
 .app-shell { position: relative; max-width: 1380px; margin: 0 auto; padding: 34px 5vw 48px; }
 .topbar { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.header-actions { display: flex; align-items: center; gap: 10px; }
 .eyebrow, .control-label { margin: 0 0 8px; color: var(--muted); font: 500 11px/1 DM Mono, monospace; letter-spacing: 0; text-transform: uppercase; }
 h1 { margin: 0; font-size: clamp(34px, 5vw, 72px); line-height: .95; letter-spacing: 0; font-weight: 800; }
 .status { border: 1px solid var(--line); padding: 10px 14px; border-radius: 999px; color: var(--muted); background: rgba(251,250,246,.7); font: 500 12px DM Mono, monospace; }
 .status[data-state='ready'] { color: #167968; border-color: rgba(55,183,164,.5); }
 .status[data-state='error'] { color: #b6483e; border-color: rgba(239,111,97,.5); }
+.theme-toggle { min-width: 54px; padding: 10px 12px; border: 1px solid var(--line); color: var(--ink); background: var(--panel); cursor: pointer; font: 500 11px DM Mono, monospace; }
+.theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
 .workspace { display: block; }
 .stage-wrap { min-width: 0; }
 .stage { position: relative; overflow: hidden; min-height: 500px; aspect-ratio: 16 / 10; border: 1px solid var(--ink); background: #263532; box-shadow: 12px 12px 0 rgba(55,183,164,.22); }
@@ -46,7 +57,7 @@ video, canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-
 .color-tool { color: #182523; background: var(--tool-color); }
 .eraser-tool { color: #182523; background: #c8ceca; }
 .tool.active { box-shadow: inset 0 0 0 4px #fff; }
-.camera-message { position: absolute; z-index: 4; inset: 0; display: grid; align-content: center; justify-items: center; gap: 10px; padding: 24px; color: var(--paper); text-align: center; background: rgba(24,37,35,.76); }
+.camera-message { position: absolute; z-index: 4; inset: 0; display: grid; align-content: center; justify-items: center; gap: 10px; padding: 24px; color: #f2f0e9; text-align: center; background: rgba(24,37,35,.76); }
 .camera-message.hidden { display: none; }
 .camera-message strong { font-size: 22px; }
 .camera-message span { max-width: 340px; color: #cbd6ce; font-size: 14px; }

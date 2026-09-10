@@ -8,6 +8,7 @@ const status = document.querySelector('#status');
 const cameraMessage = document.querySelector('#camera-message');
 const modeLabel = document.querySelector('#mode-label');
 const toolbar = document.querySelector('#toolbar');
+const themeToggle = document.querySelector('#theme-toggle');
 
 let activeColor = '#37b7a4';
 let brushSize = 6;
@@ -15,6 +16,16 @@ let erasing = false;
 let previousPoint = null;
 let smoothingPoints = [];
 let camera;
+
+function updateTheme(isNight) {
+  document.body.classList.toggle('night-mode', isNight);
+  themeToggle.textContent = isNight ? 'Sun' : 'Moon';
+  themeToggle.setAttribute('aria-label', isNight ? 'Switch to day mode' : 'Switch to night mode');
+  themeToggle.title = isNight ? 'Switch to day mode' : 'Switch to night mode';
+}
+
+const savedTheme = localStorage.getItem('air-canvas-theme');
+updateTheme(savedTheme === 'night');
 
 function setStatus(text, state = 'idle') {
   status.textContent = text;
@@ -178,6 +189,11 @@ hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0
 hands.onResults(handleResults);
 
 document.querySelector('#start-camera').addEventListener('click', startCamera);
+themeToggle.addEventListener('click', () => {
+  const isNight = !document.body.classList.contains('night-mode');
+  updateTheme(isNight);
+  localStorage.setItem('air-canvas-theme', isNight ? 'night' : 'day');
+});
 document.addEventListener('keydown', (event) => {
   if (event.key.toLowerCase() === 's') saveCanvas();
   if (event.key.toLowerCase() === 'c') clearCanvas();
