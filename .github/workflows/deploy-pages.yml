@@ -28,8 +28,8 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp version2/index.html _site/index.html
-          cp -r version2/static _site/static
+          cp index.html _site/index.html
+          cp -r static _site/static
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

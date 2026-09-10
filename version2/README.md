@@ -11,7 +11,7 @@ python -m pip install -r requirements.txt
 ## Run
 
 ```bash
-python manage.py runserver
+python ../manage.py runserver
 ```
 
 Open `http://127.0.0.1:8000/` in a browser and allow camera access. The
@@ -45,9 +45,9 @@ download because GitHub Pages does not run the Django save API.
 
 ## Common tweaks
 
-- **Brush defaults**: edit the controls in `static/aircanvas/app.js`.
-- **Colors**: edit the swatches in `aircanvas/templates/aircanvas/canvas.html`.
-- **Saved files**: server copies are written to the ignored `media/` folder.
+- **Brush defaults**: edit the controls in `../static/aircanvas/app.js`.
+- **Colors**: edit the swatches in `../aircanvas/templates/aircanvas/canvas.html`.
+- **Saved files**: server copies are written to the ignored `../media/` folder.
 
 ## Troubleshooting
 
