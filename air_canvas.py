@@ -19,6 +19,7 @@ Controls (keyboard)
 --------------------
 - 'q' or ESC : quit
 - 'c'        : clear canvas
+- 's'        : save the drawing as drawing.png
 - '+' / '-'  : increase / decrease brush size
 
 Requirements
@@ -250,6 +251,11 @@ def main():
                 break
             elif key == ord('c'):
                 canvas[:] = 0
+            elif key == ord('s'):
+                if cv2.imwrite("drawing.png", canvas):
+                    print("Drawing saved to drawing.png")
+                else:
+                    print("Error: could not save drawing.png")
             elif key == ord('+') or key == ord('='):
                 brush_size = min(MAX_BRUSH, brush_size + 2)
             elif key == ord('-'):

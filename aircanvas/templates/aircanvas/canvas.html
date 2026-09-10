@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Canvas</title>
+  <link rel="stylesheet" href="{% static 'aircanvas/app.css' %}">
+</head>
+<body>
+  {% csrf_token %}
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Gesture drawing studio</p>
+        <h1>Air Canvas</h1>
+      </div>
+      <div class="status" id="status" data-state="idle">Camera idle</div>
+    </header>
+
+    <section class="workspace" aria-label="Air Canvas workspace">
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="draw-canvas"></canvas>
+          <canvas id="guide-canvas"></canvas>
+          <nav class="toolbar" id="toolbar" aria-label="Finger controlled toolbar">
+            <span class="tool clear-tool" data-tool="clear">CLEAR</span>
+            <span class="tool color-tool active" data-tool="color" data-color="#0000ff" style="--tool-color: #0000ff">BLUE</span>
+            <span class="tool color-tool" data-tool="color" data-color="#00ff00" style="--tool-color: #00ff00">GREEN</span>
+            <span class="tool color-tool" data-tool="color" data-color="#ff0000" style="--tool-color: #ff0000">RED</span>
+            <span class="tool color-tool" data-tool="color" data-color="#ffff00" style="--tool-color: #ffff00">YELLOW</span>
+            <span class="tool color-tool" data-tool="color" data-color="#ff00ff" style="--tool-color: #ff00ff">PURPLE</span>
+            <span class="tool eraser-tool" data-tool="eraser">ERASER</span>
+          </nav>
+          <div class="camera-message" id="camera-message">
+            <strong>Camera access is needed</strong>
+            <span>Start the camera to begin drawing with your hand.</span>
+            <button class="primary-button" id="start-camera">Start camera</button>
+          </div>
+        </div>
+        <p class="hint" id="mode-label">Show your hand to the camera. Index finger up draws.</p>
+        <section class="instructions" aria-label="How to use Air Canvas">
+          <strong>How to use</strong>
+          <span><b>Index finger up</b> Draw</span>
+          <span><b>Index + middle</b> Move and choose a toolbar color</span>
+          <span><b>S</b> Save PNG</span>
+          <span><b>C</b> Clear</span>
+          <span><b>+ / -</b> Brush size</span>
+        </section>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="{% static 'aircanvas/app.js' %}"></script>
+</body>
+</html>

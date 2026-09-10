@@ -1,22 +1,22 @@
 # Air Canvas
 
-Draw in the air using just your webcam and your index finger — no mouse, no stylus.
+Draw in the air using your webcam and your index finger in a Django web app.
 
 ## Setup
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
-
-(This needs Python 3.8–3.11 for best MediaPipe compatibility. It must run
-on your own machine with a webcam — it won't work in a browser or a
-headless server.)
 
 ## Run
 
 ```bash
-python air_canvas.py
+python manage.py runserver
 ```
+
+Open `http://127.0.0.1:8000/` in a browser and allow camera access. The
+browser runs hand tracking locally; Django serves the interface and stores
+saved PNGs in `media/`.
 
 ## How to use it
 
@@ -24,40 +24,31 @@ python air_canvas.py
   follows your fingertip.
 - **Move without drawing**: hold up your index *and* middle finger — this
   is "pen up" mode, so you can reposition without leaving a mark.
-- **Pick a color / tool**: while in pen-up mode (index + middle up), move
-  your hand up to the toolbar at the top and hover over a color swatch,
-  `ERASER`, or `CLEAR`.
+- **Pick a color / tool**: raise your index and middle fingers, then hover
+  over the top toolbar to choose a color, `ERASER`, or `CLEAR`.
 - **Keyboard shortcuts**:
-  - `q` or `Esc` — quit
+  - `s` — save and download the drawing as `drawing.png`
   - `c` — clear the canvas
   - `+` / `-` — increase / decrease brush size
 
 ## How it works
 
-1. **MediaPipe Hands** detects 21 landmarks on your hand every frame.
-2. We check which fingers are extended by comparing fingertip and
-   knuckle y-coordinates (x-coordinates for the thumb).
-3. The index fingertip's position becomes the "pen." Its path is drawn
-   onto a separate canvas layer (not directly onto the webcam frame),
-   which is then composited back over the live video each frame — this
-   is why strokes persist even as your hand moves away.
-4. A small rolling average of recent points smooths out jitter.
+1. The browser camera feed is processed by MediaPipe Hands from a CDN.
+2. The index fingertip becomes the pen and its path is drawn onto a canvas.
+3. Django serves the page and accepts PNG data at `/api/save/`.
 
 ## Common tweaks
 
-- **Camera resolution**: change `CAM_WIDTH` / `CAM_HEIGHT` at the top of
-  `air_canvas.py`.
-- **Brush defaults**: `DEFAULT_BRUSH_SIZE`, `MIN_BRUSH`, `MAX_BRUSH`.
-- **Colors**: edit the `COLORS` dictionary to add/remove palette options.
-- **Save your drawing**: add a keypress handler that calls
-  `cv2.imwrite("drawing.png", canvas)`.
+- **Brush defaults**: edit the controls in `static/aircanvas/app.js`.
+- **Colors**: edit the swatches in `aircanvas/templates/aircanvas/canvas.html`.
+- **Saved files**: server copies are written to the ignored `media/` folder.
 
 ## Troubleshooting
 
-- **Webcam doesn't open**: try changing `cv2.VideoCapture(0)` to `1` or
-  `2` if you have multiple cameras.
+- **Webcam doesn't open**: check browser camera permissions and close other
+  apps that may already be using the camera.
 - **Hand not detected reliably**: make sure you have good, even lighting
   and your whole hand is in frame; lower `min_detection_confidence`
   slightly if needed.
-- **Laggy**: lower `CAM_WIDTH`/`CAM_HEIGHT`, or reduce `max_num_hands`
-  (already set to 1).
+- **Laggy**: close other camera-heavy tabs or reduce the camera dimensions in
+  `static/aircanvas/app.js`.
