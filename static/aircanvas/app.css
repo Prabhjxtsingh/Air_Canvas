@@ -54,6 +54,9 @@ video, canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-
 .instructions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 18px; padding: 14px 16px; border: 1px solid var(--line); color: var(--muted); background: rgba(251,250,246,.72); font: 11px DM Mono, monospace; }
 .instructions strong { color: var(--ink); font-family: Manrope, sans-serif; font-size: 12px; }
 .instructions b { color: var(--ink); font-weight: 500; }
+.credit { margin-top: 28px; color: var(--muted); text-align: center; font: 11px DM Mono, monospace; }
+.credit a { color: var(--ink); text-decoration-color: var(--teal); text-underline-offset: 3px; }
+.credit a:hover { color: var(--teal); }
 button { font: 700 12px Manrope, sans-serif; letter-spacing: 0; }
 .primary-button { min-height: 42px; padding: 0 16px; border: 1px solid var(--ink); cursor: pointer; }
 .primary-button { color: var(--paper); background: var(--ink); }
