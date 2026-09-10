@@ -19,12 +19,17 @@ let camera;
 
 function updateTheme(isNight) {
   document.body.classList.toggle('night-mode', isNight);
+  document.body.dataset.theme = isNight ? 'night' : 'day';
   themeToggle.textContent = isNight ? 'Sun' : 'Moon';
   themeToggle.setAttribute('aria-label', isNight ? 'Switch to day mode' : 'Switch to night mode');
   themeToggle.title = isNight ? 'Switch to day mode' : 'Switch to night mode';
 }
 
-const savedTheme = localStorage.getItem('air-canvas-theme');
+let savedTheme = 'day';
+try {
+  savedTheme = localStorage.getItem('air-canvas-theme') || 'day';
+} catch (error) {
+}
 updateTheme(savedTheme === 'night');
 
 function setStatus(text, state = 'idle') {
@@ -192,7 +197,10 @@ document.querySelector('#start-camera').addEventListener('click', startCamera);
 themeToggle.addEventListener('click', () => {
   const isNight = !document.body.classList.contains('night-mode');
   updateTheme(isNight);
-  localStorage.setItem('air-canvas-theme', isNight ? 'night' : 'day');
+  try {
+    localStorage.setItem('air-canvas-theme', isNight ? 'night' : 'day');
+  } catch (error) {
+  }
 });
 document.addEventListener('keydown', (event) => {
   if (event.key.toLowerCase() === 's') saveCanvas();

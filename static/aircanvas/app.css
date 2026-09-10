@@ -11,7 +11,8 @@
   --gold: #f2b84b;
 }
 
-body.night-mode {
+body.night-mode,
+body[data-theme='night'] {
   --ink: #edf4ef;
   --muted: #a4b5ad;
   --paper: #172321;
