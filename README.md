@@ -28,4 +28,11 @@ Open `http://127.0.0.1:8000/` and allow camera access. See the detailed
 instructions in [version2/README.md](version2/README.md).
 
 The GitHub Pages version uses the browser download for PNG saving. The local
-Django version also stores a server copy in `version2/media/`.
+Django version also stores a server copy in `media/`.
+
+## Project layout
+
+- `version1/` — original desktop OpenCV and MediaPipe application
+- `manage.py`, `config/`, `aircanvas/` — Version 2 Django application
+- `index.html`, `static/` — GitHub Pages browser entry point and assets
+- `.github/workflows/deploy-pages.yml` — automatic Pages deployment
