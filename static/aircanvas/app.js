@@ -164,7 +164,8 @@ function handleResults(results) {
     drawContext.lineCap = 'round';
     drawContext.lineJoin = 'round';
     drawContext.lineWidth = erasing ? 40 : brushSize;
-    drawContext.strokeStyle = erasing ? '#263532' : activeColor;
+    drawContext.globalCompositeOperation = erasing ? 'destination-out' : 'source-over';
+    drawContext.strokeStyle = activeColor;
     drawContext.stroke();
     previousPoint = point;
     return;
